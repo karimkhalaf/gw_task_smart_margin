@@ -1,0 +1,62 @@
+<templates>
+
+    <t t-name="smart_margin.MarginBreakdownPopup">
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Landed Cost</th>
+                <th>Overhead Cost</th>
+                <th>Margin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop over state.lines -->
+            <t t-foreach="state.lines" t-as="line" t-key="line.product">
+                <tr>
+                <td><span t-esc="line.product"/>
+                <button class="btn" t-on-click=" ()=>toggleRow(this,line.product)">
+                <t t-esc="state.expanded[line.product] ? '-' : '+' "/>
+                </button>
+                </td>
+                <td class="text-right"><span t-esc="line.qty"/></td>
+                <td class="text-right"><span t-esc="line.price_unit"/></td>
+                <td class="text-right"><span t-esc="line.landed_cost"/></td>
+                <td class="text-right"><span t-esc="line.overhead_cost"/></td>
+                <td class="text-right"><span t-esc="line.line_margin"/></td>
+                </tr>
+
+                <tr  t-if="state.expanded[line.product]" >
+
+                    <ul t-if="line.cost_breakdown.length">
+                    <t t-foreach="line.cost_breakdown" t-as="cost_item" t-key="cost_item.label">
+                        <li>
+                        <t t-esc="cost_item.label"/> :<t t-esc="cost_item.value"/>
+                        </li>
+                    </t>
+
+                        </ul>
+
+
+                </tr>
+
+            </t>
+
+            <!-- Totals Row -->
+            <tr class="font-weight-bold">
+                <td>Total</td>
+                <td class="text-right"><span t-esc="totalRow.qty"/></td>
+                <td class="text-right"><span t-esc="totalRow.price_unit"/></td>
+                <td class="text-right"><span t-esc="totalRow.landed_cost"/></td>
+                <td class="text-right"><span t-esc="totalRow.overhead_cost"/></td>
+                <td class="text-right"><span t-esc="totalRow.line_margin"/></td>
+            </tr>
+        </tbody>
+    </table>
+</t>
+
+
+
+</templates>

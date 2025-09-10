@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+
+
+
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="view_inherit_sale_margin_form" model="ir.ui.view">
+          <field name="name">view.inherit.sale.margin.form</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//sheet" position="before">
+                  <widget name="sale_smart_margin"/>
+              </xpath>
+
+          </field>
+      </record>
+      <!-- Inherit Form View to Modify it -->
+      <record id="view_inherit_category_overhead_form" model="ir.ui.view">
+          <field name="name">view.inherit.categ.overhead.form</field>
+          <field name="model">product.category</field>
+          <field name="inherit_id" ref="product.product_category_form_view"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='parent_id']" position="after">
+                  <field name="overhead_value"/>
+              </xpath>
+
+          </field>
+      </record>
+
+
+
+      <!-- Inherit Form View to Modify it -->
+      <record id="view_inherit_setting_overhead_form" model="ir.ui.view">
+          <field name="name">view.inherit.setting.overhead.form</field>
+          <field name="model">res.config.settings</field>
+          <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+          <field name="arch" type="xml">
+
+              <!-- position: after|before|replace|attributes|inside -->
+              <xpath expr="//block[@name='invoicing_setting_container']" position="after">
+                  <block title="Sales Smart Margin">
+                      <setting id="overhead_margin_mode">
+                          <field name="overhead_mode" widget="radio"/>
+                      </setting>
+
+                  </block>
+                  <!-- Add your fields or attributes here -->
+              </xpath>
+
+          </field>
+      </record>
+
+  </data>
+</odoo>

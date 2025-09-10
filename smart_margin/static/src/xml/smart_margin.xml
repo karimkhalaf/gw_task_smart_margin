@@ -1,0 +1,15 @@
+<templates>
+    <t t-name="smart_margin.SmartMarginCard" >
+        <div class="card" role="button" t-on-click="openBreakdownPopup">
+            <span>Revenue <t t-esc="state.revenue"/>  </span>
+            <span>COGS <t t-esc="state.cogs"/>  </span>
+            <span>Net <t t-esc="state.net"/>  </span>
+
+        </div>
+
+
+
+    </t>
+
+
+</templates>
